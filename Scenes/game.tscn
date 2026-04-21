@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxg44eyhk22a1"]
+
+[ext_resource type="PackedScene" uid="uid://dq1vfpflgqyke" path="res://Scenes/player.tscn" id="1_ebmjs"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ebmjs"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qxrlw"]
+distance = -13.0
+
+[node name="Game" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [-69.0]
+
+[node name="Player" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(4, 6)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(4, 2)
+physics_material_override = SubResource("PhysicsMaterial_ebmjs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1, 47)
+shape = SubResource("WorldBoundaryShape2D_qxrlw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1, -7)
