@@ -85,18 +85,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
-size = Vector2(33.5, 71.875)
+size = Vector2(22.5, 53)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2.0000076, -41)
-scale = Vector2(0.43483227, 0.43571427)
+position = Vector2(2, -27)
+scale = Vector2(0.30295694, 0.30357146)
 sprite_frames = SubResource("SpriteFrames_vgqql")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6.75, -44.0625)
+position = Vector2(3, -26)
 shape = SubResource("RectangleShape2D_fkybt")
