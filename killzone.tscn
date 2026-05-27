@@ -5,17 +5,12 @@ script/source = "extends Area2D
 
 @onready var timer: Timer = $Timer
 
-
-
+func _on_body_entered(_body: Node2D) -> void:
+	print(\"you Died\")
+	timer.start()
 
 func _on_timer_timeout() -> void:
 	get_tree().reload_current_scene()
-
-
-func _on_body_entered(body: Node2D) -> void:
-	print(\"you died!\")
-	timer.start()
-	
 "
 
 [node name="killzone" type="Area2D"]
@@ -24,5 +19,7 @@ script = SubResource("GDScript_n74wa")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.6
+one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

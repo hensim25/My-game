@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://di0rfcgrne2bb"]
+
+[ext_resource type="Texture2D" uid="uid://bfpve4mbqcx2u" path="res://New Piskel.png" id="1_370ba"]
+
+[sub_resource type="GDScript" id="GDScript_370ba"]
+script/source = "extends Area2D
+
+@onready var game_manager: Node = %GameManager
+
+var time = 0.0
+var amplitude = 10.0
+var frequency = 2.0
+func _process(delta):
+	time += delta
+	# Add a slight horizontal sway
+	position.y += cos(time * frequency) * 0.5
+	# The AnimationPlayer handles the up/down animation
+# Called when the node enters the scene tree for the first time.
+
+
+func _on_body_entered(_body: Node2D) -> void:
+	queue_free()
+	game_manager.add_point()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rv6ig"]
+atlas = ExtResource("1_370ba")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eimrw"]
+atlas = ExtResource("1_370ba")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_msghv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rv6ig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eimrw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yr1lg"]
+radius = 6.3245554
+
+[node name="Feather" type="Area2D"]
+collision_mask = 2
+script = SubResource("GDScript_370ba")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5, -4)
+scale = Vector2(0.45, 0.45)
+sprite_frames = SubResource("SpriteFrames_msghv")
+autoplay = "default"
+frame = 1
+frame_progress = 0.44726095
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -4)
+shape = SubResource("CircleShape2D_yr1lg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
