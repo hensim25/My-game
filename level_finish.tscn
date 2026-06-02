@@ -1,6 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://drppdj2mvx7eu"]
+[gd_scene load_steps=11 format=3 uid="uid://drppdj2mvx7eu"]
 
 [ext_resource type="Texture2D" uid="uid://c6v8fsjtylpx8" path="res://Scenes/download.png" id="1_pywa0"]
+
+[sub_resource type="GDScript" id="GDScript_pywa0"]
+script/source = "extends Area2D
+
+@export var target_level : PackedScene
+
+func _on_body_entered(body: Node2D) -> void:
+	if (body.name == \"Player\"):
+		get_tree().change_scene_to_file(\"res://Scenes/main menu.tscn\")
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5k0gx"]
 atlas = ExtResource("1_pywa0")
@@ -61,6 +71,8 @@ animations = [{
 size = Vector2(59, 65)
 
 [node name="Level finish" type="Area2D"]
+collision_layer = 7
+script = SubResource("GDScript_pywa0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(82.85715, 32)
@@ -72,3 +84,5 @@ autoplay = "closed cage"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(81, 34)
 shape = SubResource("RectangleShape2D_gr5nj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

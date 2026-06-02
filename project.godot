@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Real game"
-run/main_scene="uid://cxg44eyhk22a1"
+run/main_scene="uid://duv2iq7yuspwb"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
